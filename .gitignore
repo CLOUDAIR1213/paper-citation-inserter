@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+*_citation_repaired.docx
+*_with_citations.docx
+*_citation_report.md
+*_report.md
+bibliography.json
+bibliography_raw.txt
+paper_paragraphs.json
+reference_entries.json
