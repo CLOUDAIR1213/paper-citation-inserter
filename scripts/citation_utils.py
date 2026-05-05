@@ -71,7 +71,7 @@ def format_citation_numbers(numbers: list[int]) -> str:
     for number in numbers:
         if number not in unique:
             unique.append(number)
-    return "[" + ",".join(str(number) for number in unique) + "]"
+    return "[" + ",".join(str(number) for number in sorted(unique)) + "]"
 
 
 def set_paragraph_text_with_superscript_citations(paragraph, text: str) -> None:

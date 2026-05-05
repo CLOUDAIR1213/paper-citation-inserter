@@ -7,7 +7,7 @@ description: Insert, repair, and review ordered literature citations in Word论�
 
 ## Purpose
 
-Use this skill for Chinese or bilingual academic论文 `.docx` files that need GB/T 7714 顺序编码 citation insertion, citation-order repair, or citation semantic alignment review. The default rule is: number citations by first appearance in正文, show正文 citation markers as superscript, reuse the same number for repeated citations, and make文末参考文献 match that final order.
+Use this skill for Chinese or bilingual academic论文 `.docx` files that need GB/T 7714 顺序编码 citation insertion, citation-order repair, or citation semantic alignment review. The default rule is: number citations by first appearance in正文, show正文 citation markers as superscript `[6,9]` style, reuse the same number for repeated citations, and make文末参考文献 match that final order.
 
 Do not invent missing文献信息. If metadata is absent, keep the known fields and report what needs optional联网补全.
 
@@ -35,7 +35,7 @@ Do not invent missing文献信息. If metadata is absent, keep the known fields 
 - Read all existing文末 references first and treat them as a temporary reference library.
 - Treat original文末 order only as source data; final order must follow正文 first appearance.
 - Scan正文 from beginning to end. The first unique cited文献 becomes `[1]`, the next unique cited文献 becomes `[2]`, and so on.
-- Format正文 citation markers as superscript in generated `.docx` files.
+- Format正文 citation markers as superscript in generated `.docx` files. Multiple citations in one marker use comma style such as superscript `[6,9]`, not separate `[6][9]` markers.
 - Repeated citations to the same文献 reuse their assigned number.
 - Rebuild existing citation markers instead of preserving old numbering.
 - Reorder文末参考文献 to exactly match rebuilt正文 numbering.
