@@ -92,7 +92,7 @@ Semantic review is non-mutating by default. It reports weak, mismatched, impreci
 ## Citation Rules
 
 - Number references by first appearance in the main text.
-- Format in-text citation markers as superscript in generated `.docx` files, using comma style for multiple sources, such as `[6,9]`.
+- Format in-text citation markers as superscript in generated `.docx` files. Consecutive numbers are compressed with `-`, such as `[1-3]`; commas are used only for non-consecutive numbers, such as `[1-3,5]`.
 - Reuse the same number when the same source is cited again.
 - Treat the original bibliography order as source data only.
 - Rewrite the final bibliography so it matches the rebuilt text citation order.

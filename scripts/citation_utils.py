@@ -67,11 +67,24 @@ def find_citation_markers(text: str) -> list[dict]:
 
 
 def format_citation_numbers(numbers: list[int]) -> str:
-    unique = []
+    unique: list[int] = []
     for number in numbers:
         if number not in unique:
             unique.append(number)
-    return "[" + ",".join(str(number) for number in sorted(unique)) + "]"
+    sorted_numbers = sorted(unique)
+    if not sorted_numbers:
+        return "[]"
+
+    ranges = []
+    start = previous = sorted_numbers[0]
+    for number in sorted_numbers[1:]:
+        if number == previous + 1:
+            previous = number
+            continue
+        ranges.append(f"{start}-{previous}" if start != previous else str(start))
+        start = previous = number
+    ranges.append(f"{start}-{previous}" if start != previous else str(start))
+    return "[" + ",".join(ranges) + "]"
 
 
 def set_paragraph_text_with_superscript_citations(paragraph, text: str) -> None:
