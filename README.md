@@ -1,6 +1,7 @@
 # Paper Citation Inserter
 
 Codex skill for inserting and repairing ordered literature citations in Word paper documents.
+Generated in-text citation markers are formatted as superscript by default.
 
 Documentation:
 
@@ -11,7 +12,9 @@ Documentation:
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --url https://github.com/CLOUDAIR1213/paper-citation-inserter/tree/main
+  --repo CLOUDAIR1213/paper-citation-inserter \
+  --path . \
+  --name paper-citation-inserter
 ```
 
 Restart Codex after installation.

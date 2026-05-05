@@ -7,6 +7,8 @@ It is designed for Chinese or bilingual academic `.docx` papers that use GB/T 77
 - insert citations from a user-provided literature summary;
 - repair citation numbering after paper content changes;
 - reorder the final reference list by first citation appearance in the text;
+- format generated in-text citation markers as superscript;
+- extract citation contexts for semantic alignment review;
 - reuse the same number for repeated citations;
 - report unused bibliography entries and missing reference entries.
 
@@ -16,7 +18,9 @@ Install this repository as a Codex skill:
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --url https://github.com/CLOUDAIR1213/paper-citation-inserter/tree/main
+  --repo CLOUDAIR1213/paper-citation-inserter \
+  --path . \
+  --name paper-citation-inserter
 ```
 
 Restart Codex after installation.
@@ -69,9 +73,26 @@ Extract literature notes from `.docx`, `.txt`, or text-based `.pdf`:
 python scripts/extract_reference_notes.py literature_summary.docx --output reference_entries.json
 ```
 
+Extract citation contexts for semantic alignment review:
+
+```bash
+python scripts/extract_citation_contexts.py paper.docx \
+  --reference-notes reference_entries.json \
+  --output citation_contexts.json \
+  --markdown citation_contexts.md
+```
+
+Codex should use `citation_contexts.json` to produce:
+
+- `citation_alignment_review.md`
+- `citation_revision_plan.json`
+
+Semantic review is non-mutating by default. It reports weak, mismatched, imprecise, or overly broad citations and proposes a revision plan for later confirmation.
+
 ## Citation Rules
 
 - Number references by first appearance in the main text.
+- Format in-text citation markers as superscript in generated `.docx` files.
 - Reuse the same number when the same source is cited again.
 - Treat the original bibliography order as source data only.
 - Rewrite the final bibliography so it matches the rebuilt text citation order.

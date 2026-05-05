@@ -82,3 +82,7 @@ bibliography.json
 bibliography_raw.txt
 paper_paragraphs.json
 reference_entries.json
+citation_contexts.json
+citation_contexts.md
+citation_alignment_review.md
+citation_revision_plan.json

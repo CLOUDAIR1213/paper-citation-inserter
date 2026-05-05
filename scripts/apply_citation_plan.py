@@ -8,7 +8,7 @@ from pathlib import Path
 
 from docx import Document
 
-from citation_utils import normalize_reference_key, strip_leading_reference_number
+from citation_utils import normalize_reference_key, set_paragraph_text_with_superscript_citations, strip_leading_reference_number
 from extract_bibliography import extract_bibliography_entries
 from repair_citation_order import repair_document
 
@@ -97,7 +97,10 @@ def apply_plan_to_copy(source_path: Path, plan_path: Path, working_path: Path) -
         if old_number is None:
             continue
         paragraph = doc.paragraphs[paragraph_index]
-        paragraph.text = insert_marker(paragraph.text, item.get("sentence"), f"[{old_number}]")
+        set_paragraph_text_with_superscript_citations(
+            paragraph,
+            insert_marker(paragraph.text, item.get("sentence"), f"[{old_number}]"),
+        )
 
     doc.save(str(working_path))
     return {"insertions": insertions, "candidates": candidates}

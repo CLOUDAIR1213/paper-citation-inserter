@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Citation Revision Plan",
+  "type": "object",
+  "required": ["source", "actions"],
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "Reviewed paper path or filename."
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "action",
+          "paragraph_index",
+          "sentence",
+          "current_citation",
+          "suggested_citation",
+          "reason",
+          "confidence",
+          "requires_human_confirmation"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "replace_citation",
+              "add_citation",
+              "remove_citation",
+              "narrow_range",
+              "move_citation",
+              "manual_review"
+            ]
+          },
+          "paragraph_index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "section": {
+            "type": "string"
+          },
+          "sentence": {
+            "type": "string"
+          },
+          "current_citation": {
+            "type": "string"
+          },
+          "suggested_citation": {
+            "type": ["string", "null"]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "requires_human_confirmation": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

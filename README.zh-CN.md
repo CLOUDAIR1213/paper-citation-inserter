@@ -7,6 +7,8 @@
 - 根据用户提供的文献汇总插入引用；
 - 在论文内容修改后修复正文引用编号；
 - 按正文首次引用顺序重排文末参考文献；
+- 将生成的正文引用标记设置为上标；
+- 抽取引用上下文，用于语义对齐检查；
 - 对同一篇文献的重复引用复用同一个编号；
 - 报告文末存在但正文未引用的文献；
 - 报告正文引用但文末缺失的文献条目。
@@ -17,7 +19,9 @@
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --url https://github.com/CLOUDAIR1213/paper-citation-inserter/tree/main
+  --repo CLOUDAIR1213/paper-citation-inserter \
+  --path . \
+  --name paper-citation-inserter
 ```
 
 安装后重启 Codex。
@@ -70,9 +74,26 @@ python scripts/apply_citation_plan.py paper.docx citation_plan.json \
 python scripts/extract_reference_notes.py literature_summary.docx --output reference_entries.json
 ```
 
+抽取引用上下文，用于语义对齐检查：
+
+```bash
+python scripts/extract_citation_contexts.py paper.docx \
+  --reference-notes reference_entries.json \
+  --output citation_contexts.json \
+  --markdown citation_contexts.md
+```
+
+Codex 应基于 `citation_contexts.json` 输出：
+
+- `citation_alignment_review.md`
+- `citation_revision_plan.json`
+
+语义对齐检查默认不直接修改论文。它用于识别引用不匹配、支撑偏弱、引用位置不精准、合并引用过宽等问题，并生成待确认的修订计划。
+
 ## 引用规则
 
 - 按正文首次出现顺序给文献编号。
+- 生成的 `.docx` 中，正文引用标记默认使用上标格式。
 - 同一文献再次出现时复用原编号。
 - 原文末参考文献顺序只作为来源数据，不作为最终顺序。
 - 最终文末参考文献必须和正文重建后的引用顺序一致。

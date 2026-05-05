@@ -13,6 +13,7 @@ from citation_utils import (
     find_citation_markers,
     format_citation_numbers,
     is_reference_heading,
+    set_paragraph_text_with_superscript_citations,
 )
 from extract_bibliography import extract_bibliography_entries
 
@@ -31,7 +32,7 @@ def bibliography_start_index(doc: Document) -> int | None:
 
 
 def replace_paragraph_text(paragraph: Paragraph, text: str) -> None:
-    paragraph.text = text
+    set_paragraph_text_with_superscript_citations(paragraph, text)
 
 
 def build_reference_map(entries: list[ReferenceEntry]) -> dict[int, ReferenceEntry]:

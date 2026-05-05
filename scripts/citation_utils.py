@@ -74,6 +74,19 @@ def format_citation_numbers(numbers: list[int]) -> str:
     return "[" + ",".join(str(number) for number in unique) + "]"
 
 
+def set_paragraph_text_with_superscript_citations(paragraph, text: str) -> None:
+    paragraph.text = ""
+    position = 0
+    for match in CITATION_PATTERN.finditer(text):
+        if match.start() > position:
+            paragraph.add_run(text[position : match.start()])
+        run = paragraph.add_run(match.group(0))
+        run.font.superscript = True
+        position = match.end()
+    if position < len(text):
+        paragraph.add_run(text[position:])
+
+
 @dataclass
 class ReferenceEntry:
     original_number: int | None
